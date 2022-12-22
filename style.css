@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: baseline;
+}
+
+#title {
+  padding: 20px;
+}
+
+#color-palette {
+  display: flex;
+}
