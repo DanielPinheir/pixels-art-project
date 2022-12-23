@@ -18,7 +18,7 @@ const addTitle = () => {
 };
 addTitle();
 
-// challenge2
+// challenge2 and challenge3
 const addDiv = () => {
   const elementDiv = document.createElement('div');
   elementDiv.id = 'color-palette';
@@ -28,7 +28,6 @@ addDiv();
 
 const addColorPalette = () => {
   const colorPalette = document.getElementById('color-palette');
-
   for (let index = 0; index < 4; index += 1) {
     const elementDiv = document.createElement('div');
     elementDiv.className = 'color';
@@ -36,11 +35,14 @@ const addColorPalette = () => {
     elementDiv.style.width = '50px';
     elementDiv.style.height = '50px';
     elementDiv.style.borderRadius = '50%';
-    const colorRed = Math.floor(Math.random() * 255);
-    const colorGreen = Math.floor(Math.random() * 255);
-    const colorBlue = Math.floor(Math.random() * 255);
-    elementDiv.style.backgroundColor = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
-
+    if (index === 0) {
+      elementDiv.style.backgroundColor = 'black';
+    } else {
+      const colorRed = Math.floor(Math.random() * 255);
+      const colorGreen = Math.floor(Math.random() * 255);
+      const colorBlue = Math.floor(Math.random() * 255);
+      elementDiv.style.backgroundColor = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
+    }
     colorPalette.appendChild(elementDiv);
   }
 };
