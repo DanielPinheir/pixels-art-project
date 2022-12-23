@@ -35,6 +35,14 @@ const addPalette = () => {
     elementDiv.style.width = '50px';
     elementDiv.style.height = '50px';
     elementDiv.style.borderRadius = '50%';
+    if (index === 0) {
+      elementDiv.style.backgroundColor = 'black';
+    } else {
+      const colorRed = Math.floor(Math.random() * 255);
+      const colorGreen = Math.floor(Math.random() * 255);
+      const colorBlue = Math.floor(Math.random() * 255);
+      elementDiv.style.backgroundColor = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
+    }
     colorPalette.appendChild(elementDiv);
   }
 };
@@ -68,3 +76,5 @@ const eventButtonColor = () => {
   });
 };
 eventButtonColor();
+
+// challenge5
