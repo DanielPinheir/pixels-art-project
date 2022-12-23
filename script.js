@@ -26,8 +26,8 @@ const addDiv = () => {
 };
 addDiv();
 
-const addColorPalette = () => {
-  const colorPalette = document.getElementById('color-palette');
+const addPalette = () => {
+  const colorPalette = document.querySelector('#color-palette');
   for (let index = 0; index < 4; index += 1) {
     const elementDiv = document.createElement('div');
     elementDiv.className = 'color';
@@ -35,15 +35,36 @@ const addColorPalette = () => {
     elementDiv.style.width = '50px';
     elementDiv.style.height = '50px';
     elementDiv.style.borderRadius = '50%';
-    if (index === 0) {
-      elementDiv.style.backgroundColor = 'black';
-    } else {
-      const colorRed = Math.floor(Math.random() * 255);
-      const colorGreen = Math.floor(Math.random() * 255);
-      const colorBlue = Math.floor(Math.random() * 255);
-      elementDiv.style.backgroundColor = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
-    }
     colorPalette.appendChild(elementDiv);
   }
 };
-addColorPalette();
+addPalette();
+
+// challenge 4
+const addButtonColor = () => {
+  const elementButton = document.createElement('button');
+  elementButton.id = 'button-random-color';
+  elementButton.innerText = 'Cores aleatórias';
+  getBody.appendChild(elementButton);
+};
+addButtonColor();
+
+const eventButtonColor = () => {
+  const getButton = document.querySelector('#button-random-color');
+  const colorPalette = document.querySelectorAll('.color');
+  getButton.addEventListener('click', () => {
+    for (let index = 0; index < colorPalette.length; index += 1) {
+      if (index === 0) {
+        colorPalette[index].style.backgroundColor = 'black';
+      } else {
+        const colorRed = Math.floor(Math.random() * 255);
+        const colorGreen = Math.floor(Math.random() * 255);
+        const colorBlue = Math.floor(Math.random() * 255);
+        colorPalette[
+          index
+        ].style.backgroundColor = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
+      }
+    }
+  });
+};
+eventButtonColor();
