@@ -61,17 +61,13 @@ const eventButtonColor = () => {
   const getButton = document.querySelector('#button-random-color');
   const colorPalette = document.querySelectorAll('.color');
   getButton.addEventListener('click', () => {
-    for (let index = 0; index < colorPalette.length; index += 1) {
-      if (index === 0) {
-        colorPalette[index].style.backgroundColor = 'black';
-      } else {
-        const colorRed = Math.floor(Math.random() * 255);
-        const colorGreen = Math.floor(Math.random() * 255);
-        const colorBlue = Math.floor(Math.random() * 255);
-        colorPalette[
-          index
-        ].style.backgroundColor = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
-      }
+    for (let index = 1; index < colorPalette.length; index += 1) {
+      const colorRed = Math.floor(Math.random() * 255);
+      const colorGreen = Math.floor(Math.random() * 255);
+      const colorBlue = Math.floor(Math.random() * 255);
+      colorPalette[
+        index
+      ].style.backgroundColor = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
     }
   });
 };
