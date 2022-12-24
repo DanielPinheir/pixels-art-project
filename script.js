@@ -1,12 +1,10 @@
 // escopo global
 const getBody = document.querySelector('body');
 
-// challenge1
 const addHeader = () => {
   const elementHeader = document.createElement('header');
   getBody.appendChild(elementHeader);
 };
-addHeader();
 
 const addTitle = () => {
   const getHeader = document.querySelector('header');
@@ -16,15 +14,19 @@ const addTitle = () => {
   elementH1.style.textAlign = 'center';
   getHeader.appendChild(elementH1);
 };
-addTitle();
 
-// challenge2 and challenge3
-const addDiv = () => {
+const addDivBody = (id) => {
   const elementDiv = document.createElement('div');
-  elementDiv.id = 'color-palette';
+  elementDiv.id = id;
   getBody.appendChild(elementDiv);
 };
-addDiv();
+
+const addRandomColor = () => {
+  const colorRed = Math.floor(Math.random() * 255);
+  const colorGreen = Math.floor(Math.random() * 255);
+  const colorBlue = Math.floor(Math.random() * 255);
+  return `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
+};
 
 const addPalette = () => {
   const colorPalette = document.querySelector('#color-palette');
@@ -35,42 +37,77 @@ const addPalette = () => {
     elementDiv.style.width = '50px';
     elementDiv.style.height = '50px';
     elementDiv.style.borderRadius = '50%';
-    if (index === 0) {
-      elementDiv.style.backgroundColor = 'black';
-    } else {
-      const colorRed = Math.floor(Math.random() * 255);
-      const colorGreen = Math.floor(Math.random() * 255);
-      const colorBlue = Math.floor(Math.random() * 255);
-      elementDiv.style.backgroundColor = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
-    }
     colorPalette.appendChild(elementDiv);
   }
 };
-addPalette();
 
-// challenge 4
+const createPalette = () => {
+  const elementDiv = document.createElement('div');
+  elementDiv.id = 'color-palette';
+  elementDiv.style.display = 'flex';
+  elementDiv.style.justifyContent = 'center';
+  elementDiv.style.gap = '20px';
+  getBody.appendChild(elementDiv);
+  addPalette();
+};
+
+const saveLocalStorageColors = () => {
+  const colorPalette = document.querySelectorAll('.color');
+  const paletteColors = [];
+  for (let index = 0; index < colorPalette.length; index += 1) {
+    const color = colorPalette[index].style.backgroundColor;
+    paletteColors.push(color);
+  }
+  localStorage.setItem('colorPalette', JSON.stringify(paletteColors));
+};
+
+const paintPalette = () => {
+  const getColor = document.querySelectorAll('.color');
+  for (let index = 0; index < getColor.length; index += 1) {
+    if (index === 0) {
+      getColor[index].style.backgroundColor = 'black';
+    } else {
+      getColor[index].style.backgroundColor = addRandomColor();
+    }
+  }
+  saveLocalStorageColors();
+};
+
+const getPaletteColorsStorage = () => {
+  const getColors = document.querySelectorAll('.color');
+  const getLocalStorage = JSON.parse(localStorage.getItem('colorPalette'));
+
+  for (let index = 0; index < getColors.length; index += 1) {
+    getColors[index].style.backgroundColor = getLocalStorage[index];
+  }
+};
+
 const addButtonColor = () => {
+  addDivBody('button-div');
+  const divButton = document.querySelector('#button-div');
+  divButton.style.display = 'flex';
+  divButton.style.justifyContent = 'center';
+  divButton.style.paddingTop = '20px';
   const elementButton = document.createElement('button');
   elementButton.id = 'button-random-color';
   elementButton.innerText = 'Cores aleatórias';
-  getBody.appendChild(elementButton);
+  divButton.appendChild(elementButton);
 };
-addButtonColor();
 
 const eventButtonColor = () => {
   const getButton = document.querySelector('#button-random-color');
-  const colorPalette = document.querySelectorAll('.color');
-  getButton.addEventListener('click', () => {
-    for (let index = 1; index < colorPalette.length; index += 1) {
-      const colorRed = Math.floor(Math.random() * 255);
-      const colorGreen = Math.floor(Math.random() * 255);
-      const colorBlue = Math.floor(Math.random() * 255);
-      colorPalette[
-        index
-      ].style.backgroundColor = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
-    }
-  });
+  getButton.addEventListener('click', paintPalette);
 };
-eventButtonColor();
 
-// challenge5
+window.onload = () => {
+  addHeader();
+  addTitle();
+  createPalette();
+  if (localStorage.getItem('colorPalette') === null) {
+    paintPalette();
+  } else {
+    getPaletteColorsStorage();
+  }
+  addButtonColor();
+  eventButtonColor();
+};
