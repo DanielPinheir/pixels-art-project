@@ -55,11 +55,6 @@ const saveLocalStorageColors = () => {
   const colorPalette = document.querySelectorAll('.color');
   const paletteColors = [];
   for (let index = 0; index < colorPalette.length; index += 1) {
-    if (index === 0) {
-      const color = colorPalette[index].style.backgroundColor;
-      colorPalette[index].className = 'selected';
-      paletteColors.push(color);
-    }
     const color = colorPalette[index].style.backgroundColor;
     paletteColors.push(color);
   }
@@ -82,7 +77,7 @@ const getPaletteColorsStorage = () => {
   const getColors = document.querySelectorAll('.color');
   const getLocalStorage = JSON.parse(localStorage.getItem('colorPalette'));
 
-  for (let index = 0; index < getLocalStorage.length; index += 1) {
+  for (let index = 0; index < getColors.length; index += 1) {
     getColors[index].style.backgroundColor = getLocalStorage[index];
   }
 };
