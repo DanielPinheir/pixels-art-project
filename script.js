@@ -28,9 +28,9 @@ const addRandomColor = () => {
   return `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
 };
 
-const addPalette = () => {
+const addPalette = (numberOfColors) => {
   const colorPalette = document.querySelector('#color-palette');
-  for (let index = 0; index < 4; index += 1) {
+  for (let index = 0; index < numberOfColors; index += 1) {
     const elementDiv = document.createElement('div');
     elementDiv.className = 'color';
     elementDiv.style.border = 'solid 1px black';
@@ -48,7 +48,7 @@ const createPalette = () => {
   elementDiv.style.justifyContent = 'center';
   elementDiv.style.gap = '20px';
   getBody.appendChild(elementDiv);
-  addPalette();
+  addPalette(4);
 };
 
 const saveLocalStorageColors = () => {
@@ -99,6 +99,27 @@ const eventButtonColor = () => {
   getButton.addEventListener('click', paintPalette);
 };
 
+const createFrame = () => {
+  addDivBody('pixel-board');
+  const divPixelBoard = document.querySelector('#pixel-board');
+  divPixelBoard.style.margin = '20px';
+  for (let index = 0; index < 5; index += 1) {
+    const line = document.createElement('div');
+    line.style.display = 'flex';
+    line.style.justifyContent = 'center';
+    for (let index1 = 0; index1 < 5; index1 += 1) {
+      const cell = document.createElement('div');
+      cell.className = 'pixel';
+      cell.style.width = '40px';
+      cell.style.height = '40px';
+      cell.style.border = 'solid 1px black';
+      cell.style.backgroundColor = 'white';
+      line.appendChild(cell);
+    }
+    divPixelBoard.appendChild(line);
+  }
+};
+
 window.onload = () => {
   addHeader();
   addTitle();
@@ -110,4 +131,5 @@ window.onload = () => {
   }
   addButtonColor();
   eventButtonColor();
+  createFrame();
 };
