@@ -65,8 +65,8 @@ const paintPalette = () => {
   const getColor = document.querySelectorAll('.color');
   for (let index = 0; index < getColor.length; index += 1) {
     if (index === 0) {
-      getColor[index].style.backgroundColor = 'black';
-      getColor[index].className = 'selected';
+      getColor[index].style.backgroundColor = 'rgb(0,0,0)';
+      getColor[index].className += ' selected';
     } else {
       getColor[index].style.backgroundColor = addRandomColor();
     }
