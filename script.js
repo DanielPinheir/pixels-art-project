@@ -79,10 +79,6 @@ const getPaletteColorsStorage = () => {
   const getLocalStorage = JSON.parse(localStorage.getItem('colorPalette'));
 
   for (let index = 0; index < getColors.length; index += 1) {
-    if (index === 0) {
-      getColors[index].style.backgroundColor = getLocalStorage[index];
-      getColors[index].className = 'selected';
-    }
     getColors[index].style.backgroundColor = getLocalStorage[index];
   }
 };
