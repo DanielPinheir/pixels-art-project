@@ -79,6 +79,10 @@ const getPaletteColorsStorage = () => {
   const getLocalStorage = JSON.parse(localStorage.getItem('colorPalette'));
 
   for (let index = 0; index < getColors.length; index += 1) {
+    if (index === 0) {
+      getColors[index].style.backgroundColor = getLocalStorage[index];
+      getColors[index].className = 'color selected';
+    }
     getColors[index].style.backgroundColor = getLocalStorage[index];
   }
 };
@@ -121,6 +125,24 @@ const createFrame = () => {
   }
 };
 
+const selectColorPalette = () => {
+  const paletteColors = document.querySelector('#color-palette');
+  const elementClassSelected = document.querySelectorAll('.color');
+  paletteColors.addEventListener('click', (element) => {
+    const elementBackGroundColor = element.target.style.backgroundColor;
+    for (let index = 0; index < elementClassSelected.length; index += 1) {
+      if (
+        elementClassSelected[index].style.backgroundColor !=
+        elementBackGroundColor
+      ) {
+        elementClassSelected[index].className = 'color';
+      } else {
+        elementClassSelected[index].className = 'color selected';
+      }
+    }
+  });
+};
+
 window.onload = () => {
   addHeader();
   addTitle();
@@ -133,4 +155,5 @@ window.onload = () => {
   addButtonColor();
   eventButtonColor();
   createFrame();
+  selectColorPalette();
 };
