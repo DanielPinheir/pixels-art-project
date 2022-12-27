@@ -132,7 +132,7 @@ const selectColorPalette = () => {
     const elementBackGroundColor = element.target.style.backgroundColor;
     for (let index = 0; index < elementClassSelected.length; index += 1) {
       if (
-        elementClassSelected[index].style.backgroundColor !=
+        elementClassSelected[index].style.backgroundColor !==
         elementBackGroundColor
       ) {
         elementClassSelected[index].className = 'color';
