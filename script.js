@@ -128,18 +128,26 @@ const createFrame = () => {
 const selectColorPalette = () => {
   const paletteColors = document.querySelector('#color-palette');
   const elementClassSelected = document.querySelectorAll('.color');
-  paletteColors.addEventListener('click', (element) => {
-    const elementBackGroundColor = element.target.style.backgroundColor;
+  paletteColors.addEventListener('click', (event) => {
+    const elementBackGroundPalette = event.target.style.backgroundColor;
     for (let index = 0; index < elementClassSelected.length; index += 1) {
       if (
         elementClassSelected[index].style.backgroundColor !==
-        elementBackGroundColor
+        elementBackGroundPalette
       ) {
         elementClassSelected[index].className = 'color';
       } else {
         elementClassSelected[index].className = 'color selected';
       }
     }
+  });
+};
+
+const paintPixel = () => {
+  const pixelBoard = document.querySelector('#pixel-board');
+  pixelBoard.addEventListener('click', (event) => {
+    const colorSelected = document.querySelector('.selected');
+    event.target.style.backgroundColor = colorSelected.style.backgroundColor;
   });
 };
 
@@ -156,4 +164,5 @@ window.onload = () => {
   eventButtonColor();
   createFrame();
   selectColorPalette();
+  paintPixel();
 };
