@@ -88,18 +88,20 @@ const getPaletteColorsStorage = () => {
 };
 
 const addButtonColor = () => {
-  addDivBody('button-div');
-  const divButton = document.querySelector('#button-div');
+  addDivBody('buttons');
+  const divButton = document.querySelector('#buttons');
   divButton.style.display = 'flex';
   divButton.style.justifyContent = 'center';
-  divButton.style.paddingTop = '20px';
   const elementButton = document.createElement('button');
   elementButton.id = 'button-random-color';
   elementButton.innerText = 'Cores aleatórias';
+  elementButton.style.margin = '20px';
+  elementButton.style.padding = '10px';
+  elementButton.style.borderRadius = '10%';
   divButton.appendChild(elementButton);
 };
 
-const eventButtonColor = () => {
+const buttonAleatoryColor = () => {
   const getButton = document.querySelector('#button-random-color');
   getButton.addEventListener('click', paintPalette);
 };
@@ -151,6 +153,30 @@ const paintPixel = () => {
   });
 };
 
+const createButtonStartedColor = () => {
+  const divButtons = document.querySelector('#buttons');
+  const buttonClear = document.createElement('button');
+  buttonClear.id = 'clear-board';
+  buttonClear.innerText = 'Limpar';
+  buttonClear.style.margin = '20px';
+  buttonClear.style.display = 'flex';
+  buttonClear.style.padding = '10px';
+  buttonClear.style.borderRadius = '10%';
+  divButtons.appendChild(buttonClear);
+};
+
+const clearColor = () => {
+  const pixels = document.querySelectorAll('.pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].style.backgroundColor = 'white';
+  }
+};
+
+const buttonClearColor = () => {
+  const buttonClearBoard = document.querySelector('#clear-board');
+  buttonClearBoard.addEventListener('click', clearColor);
+};
+
 window.onload = () => {
   addHeader();
   addTitle();
@@ -161,8 +187,10 @@ window.onload = () => {
     getPaletteColorsStorage();
   }
   addButtonColor();
-  eventButtonColor();
+  buttonAleatoryColor();
   createFrame();
   selectColorPalette();
   paintPixel();
+  createButtonStartedColor();
+  buttonClearColor();
 };
