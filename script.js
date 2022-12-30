@@ -145,12 +145,33 @@ const selectColorPalette = () => {
   });
 };
 
+const saveLocalStoragePixels = () => {
+  const pixelsList = document.querySelectorAll('.pixel');
+  const pixelColorList = [];
+  for (let index = 0; index < pixelsList.length; index += 1) {
+    const pixelColor = pixelsList[index].style.backgroundColor;
+    pixelColorList.push(pixelColor);
+  }
+  localStorage.setItem('pixelBoard', JSON.stringify(pixelColorList));
+};
+
 const paintPixel = () => {
   const pixelBoard = document.querySelector('#pixel-board');
   pixelBoard.addEventListener('click', (event) => {
     const colorSelected = document.querySelector('.selected');
     event.target.style.backgroundColor = colorSelected.style.backgroundColor;
+    saveLocalStoragePixels();
   });
+};
+
+const getPixelsColorsStorage = () => {
+  const getPixels = document.querySelectorAll('.pixel');
+  const getLocalStoragePixelColor = JSON.parse(
+    localStorage.getItem('pixelBoard')
+  );
+  for (let index = 0; index < getPixels.length; index += 1) {
+    getPixels[index].style.backgroundColor = getLocalStoragePixelColor[index];
+  }
 };
 
 const createButtonStartedColor = () => {
@@ -191,6 +212,7 @@ window.onload = () => {
   createFrame();
   selectColorPalette();
   paintPixel();
+  getPixelsColorsStorage();
   createButtonStartedColor();
   buttonClearColor();
 };
