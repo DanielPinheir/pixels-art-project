@@ -66,6 +66,7 @@ const paintPalette = () => {
   for (let index = 0; index < getColor.length; index += 1) {
     if (index === 0) {
       getColor[index].style.backgroundColor = 'rgb(0,0,0)';
+      // eslint-disable-next-line sonarjs/no-duplicate-string
       getColor[index].className = 'color selected';
     } else {
       getColor[index].style.backgroundColor = addRandomColor();
@@ -134,6 +135,7 @@ const selectColorPalette = () => {
     const elementBackGroundPalette = event.target.style.backgroundColor;
     for (let index = 0; index < elementClassSelected.length; index += 1) {
       if (
+        // eslint-disable-next-line operator-linebreak
         elementClassSelected[index].style.backgroundColor !==
         elementBackGroundPalette
       ) {
@@ -159,6 +161,7 @@ const paintPixel = () => {
   const pixelBoard = document.querySelector('#pixel-board');
   pixelBoard.addEventListener('click', (event) => {
     const colorSelected = document.querySelector('.selected');
+    // eslint-disable-next-line no-param-reassign
     event.target.style.backgroundColor = colorSelected.style.backgroundColor;
     saveLocalStoragePixels();
   });
@@ -166,11 +169,9 @@ const paintPixel = () => {
 
 const getPixelsColorsStorage = () => {
   const getPixels = document.querySelectorAll('.pixel');
-  const getLocalStoragePixelColor = JSON.parse(
-    localStorage.getItem('pixelBoard')
-  );
+  const getLocalStoragePixel = JSON.parse(localStorage.getItem('pixelBoard'));
   for (let index = 0; index < getPixels.length; index += 1) {
-    getPixels[index].style.backgroundColor = getLocalStoragePixelColor[index];
+    getPixels[index].style.backgroundColor = getLocalStoragePixel[index];
   }
 };
 
@@ -191,6 +192,7 @@ const clearColor = () => {
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].style.backgroundColor = 'white';
   }
+  saveLocalStoragePixels();
 };
 
 const buttonClearColor = () => {
@@ -212,7 +214,11 @@ window.onload = () => {
   createFrame();
   selectColorPalette();
   paintPixel();
-  getPixelsColorsStorage();
   createButtonStartedColor();
   buttonClearColor();
+  if (localStorage.getItem('pixelBoard') === null) {
+    clearColor();
+  } else {
+    getPixelsColorsStorage();
+  }
 };
