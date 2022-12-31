@@ -44,7 +44,6 @@ const addPalette = (numberOfColors) => {
 const createPalette = () => {
   const elementDiv = document.createElement('div');
   elementDiv.id = 'color-palette';
-  elementDiv.style.display = 'flex';
   elementDiv.style.justifyContent = 'center';
   elementDiv.style.gap = '20px';
   getBody.appendChild(elementDiv);
@@ -107,15 +106,43 @@ const buttonAleatoryColor = () => {
   getButton.addEventListener('click', paintPalette);
 };
 
-const createFrame = () => {
+const createInputSizeFrame = () => {
+  addDivBody('size');
+  const divSize = document.querySelector('#size');
+  divSize.style.display = 'flex';
+  divSize.style.justifyContent = 'center';
+  const inputSize = document.createElement('input');
+  inputSize.type = 'number';
+  inputSize.min = '1';
+  inputSize.id = 'board-size';
+  inputSize.style.borderRadius = '10%';
+  divSize.appendChild(inputSize);
+};
+
+const createButtomGenerateBoard = () => {
+  const divSize = document.querySelector('#size');
+  const buttonSize = document.createElement('button');
+  buttonSize.id = 'generate-board';
+  buttonSize.innerText = 'VQV';
+  buttonSize.style.marginLeft = '20px';
+  buttonSize.style.borderRadius = '10%';
+  buttonSize.style.padding = '10px';
+  divSize.appendChild(buttonSize);
+};
+
+const addDivFrame = () => {
   addDivBody('pixel-board');
+};
+
+const createFrame = (size) => {
   const divPixelBoard = document.querySelector('#pixel-board');
   divPixelBoard.style.margin = '20px';
-  for (let index = 0; index < 5; index += 1) {
+  for (let index = 0; index < size; index += 1) {
     const line = document.createElement('div');
     line.style.display = 'flex';
     line.style.justifyContent = 'center';
-    for (let index1 = 0; index1 < 5; index1 += 1) {
+    line.className = 'line';
+    for (let index1 = 0; index1 < size; index1 += 1) {
       const cell = document.createElement('div');
       cell.className = 'pixel';
       cell.style.width = '40px';
@@ -175,6 +202,29 @@ const getPixelsColorsStorage = () => {
   }
 };
 
+const removeFrame = () => {
+  const elementLine = document.querySelectorAll('.line');
+  const pixelBoard = document.querySelector('#pixel-board');
+  for (let index = 0; index < elementLine.length; index += 1) {
+    pixelBoard.firstChild.remove();
+  }
+};
+
+const buttonSizeFrame = () => {
+  const elementButtonVQV = document.querySelector('#generate-board');
+  elementButtonVQV.addEventListener('click', () => {
+    const elementInputSizeValue = document.querySelector('#board-size').value;
+    console.log(elementInputSizeValue);
+    if (elementInputSizeValue === '') {
+      alert('Board inválido!');
+    } else {
+      removeFrame();
+      createFrame(elementInputSizeValue);
+      localStorage.removeItem('pixelBoard');
+    }
+  });
+};
+
 const createButtonStartedColor = () => {
   const divButtons = document.querySelector('#buttons');
   const buttonClear = document.createElement('button');
@@ -211,9 +261,13 @@ window.onload = () => {
   }
   addButtonColor();
   buttonAleatoryColor();
-  createFrame();
+  createInputSizeFrame();
+  createButtomGenerateBoard();
+  addDivFrame();
+  createFrame(5);
   selectColorPalette();
   paintPixel();
+  buttonSizeFrame();
   createButtonStartedColor();
   buttonClearColor();
   if (localStorage.getItem('pixelBoard') === null) {
