@@ -213,14 +213,20 @@ const removeFrame = () => {
 const buttonSizeFrame = () => {
   const elementButtonVQV = document.querySelector('#generate-board');
   elementButtonVQV.addEventListener('click', () => {
-    const elementInputSizeValue = document.querySelector('#board-size').value;
-    console.log(elementInputSizeValue);
+    let elementInputSizeValue = document.querySelector('#board-size').value;
     if (elementInputSizeValue === '') {
       alert('Board inválido!');
     } else {
+      if (elementInputSizeValue < 5) {
+        elementInputSizeValue = '5';
+      }
+      if (elementInputSizeValue > 50) {
+        elementInputSizeValue = '50';
+      }
       removeFrame();
       createFrame(elementInputSizeValue);
       localStorage.removeItem('pixelBoard');
+      localStorage.setItem('boardSize', elementInputSizeValue);
     }
   });
 };
@@ -264,7 +270,11 @@ window.onload = () => {
   createInputSizeFrame();
   createButtomGenerateBoard();
   addDivFrame();
-  createFrame(5);
+  if (localStorage.getItem('boardSize') === null) {
+    createFrame(5);
+  } else {
+    createFrame(parseInt(localStorage.getItem('boardSize')));
+  }
   selectColorPalette();
   paintPixel();
   buttonSizeFrame();
