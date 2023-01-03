@@ -5,10 +5,6 @@
   vertical-align: baseline;
 }
 
-#title {
-  padding: 20px;
-}
-
-#color-palette {
-  display: flex;
+body {
+  background-image: linear-gradient(to bottom, rgb(196, 132, 172), orange);
 }

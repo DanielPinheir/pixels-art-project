@@ -12,6 +12,9 @@ const addTitle = () => {
   elementH1.id = 'title';
   elementH1.innerHTML = 'Paleta de Cores';
   elementH1.style.textAlign = 'center';
+  elementH1.style.padding = '20px';
+  elementH1.style.fontFamily = 'monaco';
+  elementH1.style.fontStyle = 'italic';
   getHeader.appendChild(elementH1);
 };
 
@@ -46,6 +49,7 @@ const createPalette = () => {
   elementDiv.id = 'color-palette';
   elementDiv.style.justifyContent = 'center';
   elementDiv.style.gap = '20px';
+  elementDiv.style.display = 'flex';
   getBody.appendChild(elementDiv);
   addPalette(4);
 };
@@ -97,13 +101,22 @@ const addButtonColor = () => {
   elementButton.innerText = 'Cores aleatórias';
   elementButton.style.margin = '20px';
   elementButton.style.padding = '10px';
-  elementButton.style.borderRadius = '10%';
+  elementButton.style.borderRadius = '4px';
+  elementButton.style.backgroundColor = 'purple';
+  elementButton.style.color = 'white';
+  elementButton.style.fontFamily = 'monaco';
   divButton.appendChild(elementButton);
 };
 
 const buttonAleatoryColor = () => {
   const getButton = document.querySelector('#button-random-color');
   getButton.addEventListener('click', paintPalette);
+  getButton.addEventListener('mouseover', () => {
+    getButton.style.backgroundColor = 'orange';
+  });
+  getButton.addEventListener('mouseout', () => {
+    getButton.style.backgroundColor = 'purple';
+  });
 };
 
 const createInputSizeFrame = () => {
@@ -125,8 +138,11 @@ const createButtomGenerateBoard = () => {
   buttonSize.id = 'generate-board';
   buttonSize.innerText = 'VQV';
   buttonSize.style.marginLeft = '20px';
-  buttonSize.style.borderRadius = '10%';
+  buttonSize.style.borderRadius = '4px';
   buttonSize.style.padding = '10px';
+  buttonSize.style.backgroundColor = 'purple';
+  buttonSize.style.color = 'white';
+  buttonSize.style.fontFamily = 'Helvetica';
   divSize.appendChild(buttonSize);
 };
 
@@ -172,6 +188,18 @@ const selectColorPalette = () => {
       }
     }
   });
+};
+
+const colorPaletteShadow = () => {
+  const paletteColors = document.querySelectorAll('.color');
+  for (let index = 0; index < paletteColors.length; index += 1) {
+    paletteColors[index].addEventListener('mouseover', () => {
+      paletteColors[index].style.boxShadow = '0 0 1em pink';
+    });
+    paletteColors[index].addEventListener('mouseout', () => {
+      paletteColors[index].style.boxShadow = '';
+    });
+  }
 };
 
 const saveLocalStoragePixels = () => {
@@ -231,6 +259,16 @@ const buttonSizeFrame = () => {
   });
 };
 
+const generateBoardHover = () => {
+  const elementButtonVQV = document.querySelector('#generate-board');
+  elementButtonVQV.addEventListener('mouseover', () => {
+    elementButtonVQV.style.backgroundColor = 'orange';
+  });
+  elementButtonVQV.addEventListener('mouseout', () => {
+    elementButtonVQV.style.backgroundColor = 'purple';
+  });
+};
+
 const createButtonStartedColor = () => {
   const divButtons = document.querySelector('#buttons');
   const buttonClear = document.createElement('button');
@@ -239,7 +277,10 @@ const createButtonStartedColor = () => {
   buttonClear.style.margin = '20px';
   buttonClear.style.display = 'flex';
   buttonClear.style.padding = '10px';
-  buttonClear.style.borderRadius = '10%';
+  buttonClear.style.borderRadius = '4px';
+  buttonClear.style.backgroundColor = 'purple';
+  buttonClear.style.color = 'white';
+  buttonClear.style.fontFamily = 'monaco';
   divButtons.appendChild(buttonClear);
 };
 
@@ -254,6 +295,12 @@ const clearColor = () => {
 const buttonClearColor = () => {
   const buttonClearBoard = document.querySelector('#clear-board');
   buttonClearBoard.addEventListener('click', clearColor);
+  buttonClearBoard.addEventListener('mouseover', () => {
+    buttonClearBoard.style.backgroundColor = 'orange';
+  });
+  buttonClearBoard.addEventListener('mouseout', () => {
+    buttonClearBoard.style.backgroundColor = 'purple';
+  });
 };
 
 window.onload = () => {
@@ -276,8 +323,10 @@ window.onload = () => {
     createFrame(parseInt(localStorage.getItem('boardSize')));
   }
   selectColorPalette();
+  colorPaletteShadow();
   paintPixel();
   buttonSizeFrame();
+  generateBoardHover();
   createButtonStartedColor();
   buttonClearColor();
   if (localStorage.getItem('pixelBoard') === null) {
