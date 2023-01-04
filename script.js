@@ -3,7 +3,20 @@ const getBody = document.querySelector('body');
 
 const addHeader = () => {
   const elementHeader = document.createElement('header');
+  elementHeader.style.backgroundColor = 'purple';
+  elementHeader.style.color = 'white';
+  elementHeader.style.marginBottom = '2rem';
   getBody.appendChild(elementHeader);
+};
+
+const addFooter = () => {
+  const elementFooter = document.createElement('footer');
+  elementFooter.innerHTML = 'Made by Daniel Machado';
+  elementFooter.style.backgroundColor = 'purple';
+  elementFooter.style.color = 'white';
+  elementFooter.style.textAlign = 'center';
+  elementFooter.style.padding = '2rem';
+  getBody.appendChild(elementFooter);
 };
 
 const addTitle = () => {
@@ -12,7 +25,7 @@ const addTitle = () => {
   elementH1.id = 'title';
   elementH1.innerHTML = 'Paleta de Cores';
   elementH1.style.textAlign = 'center';
-  elementH1.style.padding = '20px';
+  elementH1.style.padding = '1rem';
   elementH1.style.fontFamily = 'monaco';
   elementH1.style.fontStyle = 'italic';
   getHeader.appendChild(elementH1);
@@ -50,6 +63,8 @@ const createPalette = () => {
   elementDiv.style.justifyContent = 'center';
   elementDiv.style.gap = '20px';
   elementDiv.style.display = 'flex';
+  elementDiv.style.margin = '20px';
+  elementDiv.style.padding = '20px';
   getBody.appendChild(elementDiv);
   addPalette(4);
 };
@@ -96,6 +111,7 @@ const addButtonColor = () => {
   const divButton = document.querySelector('#buttons');
   divButton.style.display = 'flex';
   divButton.style.justifyContent = 'center';
+  divButton.style.margin = '1rem';
   const elementButton = document.createElement('button');
   elementButton.id = 'button-random-color';
   elementButton.innerText = 'Cores aleatórias';
@@ -124,6 +140,7 @@ const createInputSizeFrame = () => {
   const divSize = document.querySelector('#size');
   divSize.style.display = 'flex';
   divSize.style.justifyContent = 'center';
+  divSize.style.margin = '1rem';
   const inputSize = document.createElement('input');
   inputSize.type = 'number';
   inputSize.min = '1';
@@ -132,7 +149,7 @@ const createInputSizeFrame = () => {
   divSize.appendChild(inputSize);
 };
 
-const createButtomGenerateBoard = () => {
+const createButtonGenerateBoard = () => {
   const divSize = document.querySelector('#size');
   const buttonSize = document.createElement('button');
   buttonSize.id = 'generate-board';
@@ -315,7 +332,7 @@ window.onload = () => {
   addButtonColor();
   buttonAleatoryColor();
   createInputSizeFrame();
-  createButtomGenerateBoard();
+  createButtonGenerateBoard();
   addDivFrame();
   if (localStorage.getItem('boardSize') === null) {
     createFrame(5);
@@ -334,4 +351,5 @@ window.onload = () => {
   } else {
     getPixelsColorsStorage();
   }
+  addFooter();
 };

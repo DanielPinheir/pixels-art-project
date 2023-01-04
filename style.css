@@ -6,5 +6,9 @@
 }
 
 body {
-  background-image: linear-gradient(to bottom, rgb(196, 132, 172), orange);
+  background-image: linear-gradient(
+    to bottom,
+    rgb(196, 132, 172),
+    rgb(202, 141, 29)
+  );
 }
