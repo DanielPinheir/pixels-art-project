@@ -37,5 +37,6 @@ Feito com ❤️ por Daniel Machado 👋🏽 [Entre em contato!](https://www.lin
   - script.js
   - style.css
   - index.html
+  - readme.md
 - O restante dos arquivos são todos de autoria da 💚 Trybe!!
 
